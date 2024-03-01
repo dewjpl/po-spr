@@ -15,5 +15,25 @@ def create_user():
     result, code = user_service.create_user(data)
     return jsonify(result), code
 
+@app.route('/users/<int:user_id>', methods=['DELETE'])
+def delete_user(user_id):
+    result, code = user_service.delete_user(user_id)
+    return jsonify(result), code
+
+@app.route('/users/<int:user_id>', methods=['GET'])
+def get_user(user_id):
+    user = user_service.get_user(user_id)
+    if user:
+        return jsonify(user), 200
+    else:
+        return "User not found", 404
+
+@app.route('/users/<int:user_id>', methods=['PATCH'])
+def update_user(user_id):
+    data = request.json
+    result, code = user_service.update_user(user_id, data)
+    return jsonify(result), code
+
+
 if __name__ == '__main__':
     app.run(debug=True)
