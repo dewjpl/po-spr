@@ -10,7 +10,7 @@ class UserService:
         return self.users.get(user_id)
 
     def create_user(self, data):
-        if not all(key in data for key in ("firstName", "lastName", "birthYear", "group")):
+        if not all(key in data for key in ("firstName", "lastName", "age", "group")):
             return "Missing fields", 400
         user_id = self.next_id
         self.next_id += 1
