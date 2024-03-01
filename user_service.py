@@ -1,5 +1,3 @@
-# user_service.py
-
 class UserService:
     def __init__(self):
         self.users = {}
