@@ -1,3 +1,5 @@
+# user_service.py
+
 class UserService:
     def __init__(self):
         self.users = {}
@@ -8,6 +10,15 @@ class UserService:
 
     def get_user(self, user_id):
         return self.users.get(user_id)
+
+    def create_user(self, data):
+        if not all(key in data for key in ("firstName", "lastName", "birthYear", "group")):
+            return "Missing fields", 400
+        user_id = self.next_id
+        self.next_id += 1
+        data['id'] = user_id
+        self.users[user_id] = data
+        return data, 200
 
     def update_user(self, user_id, data):
         user = self.users.get(user_id)
